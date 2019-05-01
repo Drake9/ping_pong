@@ -18,7 +18,19 @@ __published:	// IDE-managed Components
         TImage *palletRed;
         TImage *ball;
         TTimer *timerBall;
+        TTimer *timerBlueLeft;
+        TTimer *timerBlueRight;
+        TTimer *timerRedLeft;
+        TTimer *timerRedRight;
         void __fastcall timerBallTimer(TObject *Sender);
+        void __fastcall timerBlueLeftTimer(TObject *Sender);
+        void __fastcall timerBlueRightTimer(TObject *Sender);
+        void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
+          TShiftState Shift);
+        void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
+          TShiftState Shift);
+        void __fastcall timerRedLeftTimer(TObject *Sender);
+        void __fastcall timerRedRightTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
