@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 141
   AutoScroll = False
   Caption = 'Ping Pong'
-  ClientHeight = 611
-  ClientWidth = 584
+  ClientHeight = 567
+  ClientWidth = 542
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -17,18 +17,18 @@ object Form1: TForm1
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 13
   object background: TShape
     Left = 0
     Top = 0
-    Width = 584
-    Height = 611
+    Width = 542
+    Height = 567
     Align = alClient
     Brush.Color = clGrayText
   end
   object palletBlue: TImage
-    Left = 248
-    Top = 560
+    Left = 222
+    Top = 520
     Width = 100
     Height = 20
     AutoSize = True
@@ -226,8 +226,8 @@ object Form1: TForm1
     Transparent = True
   end
   object palletRed: TImage
-    Left = 240
-    Top = 32
+    Left = 215
+    Top = 30
     Width = 100
     Height = 20
     AutoSize = True
@@ -425,8 +425,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TImage
-    Left = 264
-    Top = 264
+    Left = 245
+    Top = 245
     Width = 32
     Height = 32
     AutoSize = True
@@ -532,6 +532,83 @@ object Form1: TForm1
       FFFF}
     Transparent = True
   end
+  object currentPoint: TLabel
+    Left = 80
+    Top = 88
+    Width = 393
+    Height = 33
+    Alignment = taCenter
+    Caption = 'Punkt dla gracza czerwonego!'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object score: TLabel
+    Left = 216
+    Top = 144
+    Width = 97
+    Height = 33
+    Alignment = taCenter
+    Caption = '0:0'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object currentHits: TLabel
+    Left = 160
+    Top = 200
+    Width = 225
+    Height = 33
+    Alignment = taCenter
+    Caption = 'liczba odbi'#263': X'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object nextRound: TButton
+    Left = 168
+    Top = 352
+    Width = 217
+    Height = 33
+    Caption = 'Nast'#281'pna runda'
+    Enabled = False
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+  end
+  object newGame: TButton
+    Left = 168
+    Top = 440
+    Width = 217
+    Height = 33
+    Caption = 'Nowa gra'
+    Enabled = False
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Visible = False
+  end
   object timerBall: TTimer
     Interval = 20
     OnTimer = timerBallTimer
@@ -542,21 +619,21 @@ object Form1: TForm1
     Enabled = False
     Interval = 20
     OnTimer = timerBlueLeftTimer
-    Left = 104
-    Top = 552
+    Left = 72
+    Top = 512
   end
   object timerBlueRight: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerBlueRightTimer
     Left = 464
-    Top = 552
+    Top = 512
   end
   object timerRedLeft: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerRedLeftTimer
-    Left = 88
+    Left = 64
     Top = 24
   end
   object timerRedRight: TTimer
