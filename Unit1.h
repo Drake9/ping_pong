@@ -22,6 +22,11 @@ __published:	// IDE-managed Components
         TTimer *timerBlueRight;
         TTimer *timerRedLeft;
         TTimer *timerRedRight;
+        TLabel *currentPoint;
+        TLabel *score;
+        TLabel *currentHits;
+        TButton *nextRound;
+        TButton *newGame;
         void __fastcall timerBallTimer(TObject *Sender);
         void __fastcall timerBlueLeftTimer(TObject *Sender);
         void __fastcall timerBlueRightTimer(TObject *Sender);

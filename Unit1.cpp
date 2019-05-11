@@ -8,9 +8,25 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
-int ballSpeedX = -7;
-int ballSpeedY = -7;
-int palletSpeed = 5;
+int ballSpeedX = -7,    ballSpeedY = -7;
+int palletSpeed = 10;
+int hits = 0;
+int pointsBlue = 0,     pointsRed = 0;
+
+void viewPointScored(){
+        Form1->currentHits->Caption = "liczba odbiæ: " + IntToStr(hits);
+        Form1->score->Caption = IntToStr(pointsBlue) + " : " + IntToStr(pointsRed);
+
+        Form1->timerBall->Enabled = false;
+        Form1->currentPoint->Visible = true;
+        Form1->currentHits->Visible = true;
+        Form1->score->Visible = true;
+        Form1->nextRound->Visible = true;
+        Form1->newGame->Visible = true;
+
+        Form1->nextRound->Enabled = true;
+        Form1->newGame->Enabled = true;
+}
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -36,13 +52,27 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
            && ball->Top + ball->Height >= palletBlue->Top
            && ballSpeedY > 0){
                 ballSpeedY = -ballSpeedY;
+                hits++;
         }
 
         if(ball->Left + ball->Width/2 >= palletRed->Left
-           && ball->Left - ball->Width/2 <= palletRed->Left
+           && ball->Left + ball->Width/2 <= palletRed->Left + palletRed->Width
            && ball->Top <= palletRed->Top +palletRed->Height
            && ballSpeedY < 0){
                 ballSpeedY = -ballSpeedY;
+                hits++;
+        }
+
+        //          POINT
+        if(ball->Top <= palletRed->Top){
+               currentPoint->Caption  = "Punkt dla gracza niebieskiego!";
+               pointsBlue++;
+               viewPointScored();
+        }
+        if(ball->Top + ball->Height >= palletBlue->Top + palletBlue->Height){
+               currentPoint->Caption  = "Punkt dla gracza czerwonego!";
+               pointsRed++;
+               viewPointScored();
         }
 }
 //---------------------------------------------------------------------------
