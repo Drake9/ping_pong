@@ -9,7 +9,7 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 int ballSpeedX = -7,    ballSpeedY = -7;
-int palletSpeed = 10;
+int palletSpeed = 14;
 int hits = 0;
 int pointsBlue = 0,     pointsRed = 0;
 
@@ -31,6 +31,14 @@ void viewPointScored(){
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
+        AnsiString welcome = "Witamy w grze PingPong! ";
+	AnsiString blue = "Niebieski gracz steruje praw¹ i lew¹ strza³k¹. ";
+	AnsiString red = "Czerwony gracz steruje klawiszami A i D. ";
+	AnsiString hit = "Prêdkoœæ pi³ki zale¿y od przytrzymania klawisza w momencie uderzenia. ";
+        AnsiString haveFun = "Mi³ej zabawy!";
+
+	ShowMessage(welcome + sLineBreak + sLineBreak + blue + sLineBreak + red + sLineBreak
+                        + hit + sLineBreak + sLineBreak + haveFun);
 }
 //---------------------------------------------------------------------------
 
@@ -53,6 +61,13 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
            && ballSpeedY > 0){
                 ballSpeedY = -ballSpeedY;
                 hits++;
+
+                if(timerBlueLeft->Enabled == true)
+                        ballSpeedX -= palletSpeed/2;
+                else if(timerBlueRight->Enabled == true)
+                        ballSpeedX += palletSpeed/2;
+                else
+                        ballSpeedY -= palletSpeed/2;
         }
 
         if(ball->Left + ball->Width/2 >= palletRed->Left
@@ -61,6 +76,13 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
            && ballSpeedY < 0){
                 ballSpeedY = -ballSpeedY;
                 hits++;
+
+                if(timerRedLeft->Enabled == true)
+                        ballSpeedX -= palletSpeed/2;
+                else if(timerRedRight->Enabled == true)
+                        ballSpeedX += palletSpeed/2;
+                else
+                        ballSpeedY += palletSpeed/2;
         }
 
         //          POINT
@@ -135,6 +157,60 @@ void __fastcall TForm1::timerRedRightTimer(TObject *Sender)
 {
         if(palletRed->Left + palletRed->Width < background->Width - 10)
                 palletRed->Left += palletSpeed;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::nextRoundClick(TObject *Sender)
+{
+        Form1->currentPoint->Visible = false;
+        Form1->currentHits->Visible = false;
+        Form1->score->Visible = false;
+        Form1->nextRound->Visible = false;
+        Form1->newGame->Visible = false;
+
+        Form1->nextRound->Enabled = false;
+        Form1->newGame->Enabled = false;
+
+        hits = 0;
+        Form1->ball->Left = 245;
+        Form1->ball->Top = 285;
+        ballSpeedX = -7;
+        if(ballSpeedY < 0 )
+                ballSpeedY = -7;
+        else
+                ballSpeedY = 7;
+        Form1->palletBlue->Left = 222;
+        Form1->palletRed->Left = 222;
+        Sleep(1000);
+        Form1->timerBall->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::newGameClick(TObject *Sender)
+{
+        Form1->currentPoint->Visible = false;
+        Form1->currentHits->Visible = false;
+        Form1->score->Visible = false;
+        Form1->nextRound->Visible = false;
+        Form1->newGame->Visible = false;
+
+        Form1->nextRound->Enabled = false;
+        Form1->newGame->Enabled = false;
+
+        hits = 0;
+        ballSpeedX = -7;
+        ballSpeedY = -7;
+        pointsBlue = 0;
+        pointsRed = 0;
+        
+        Form1->ball->Left = 245;
+        Form1->ball->Top = 285;
+        ballSpeedX = -7;
+        ballSpeedY = -7;
+        Form1->palletBlue->Left = 222;
+        Form1->palletRed->Left = 222;
+        Sleep(1000);
+        Form1->timerBall->Enabled = true;
 }
 //---------------------------------------------------------------------------
 

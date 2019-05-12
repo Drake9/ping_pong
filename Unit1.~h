@@ -36,6 +36,8 @@ __published:	// IDE-managed Components
           TShiftState Shift);
         void __fastcall timerRedLeftTimer(TObject *Sender);
         void __fastcall timerRedRightTimer(TObject *Sender);
+        void __fastcall nextRoundClick(TObject *Sender);
+        void __fastcall newGameClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
