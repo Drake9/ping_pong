@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 464
-  Top = 141
+  Left = 453
+  Top = 126
   AutoScroll = False
   Caption = 'Ping Pong'
-  ClientHeight = 567
+  ClientHeight = 631
   ClientWidth = 542
   Color = clBtnFace
   UseDockManager = True
@@ -22,13 +22,13 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 542
-    Height = 567
+    Height = 631
     Align = alClient
     Brush.Color = clGrayText
   end
   object palletBlue: TImage
     Left = 222
-    Top = 520
+    Top = 576
     Width = 100
     Height = 20
     AutoSize = True
@@ -226,7 +226,7 @@ object Form1: TForm1
     Transparent = True
   end
   object palletRed: TImage
-    Left = 215
+    Left = 223
     Top = 30
     Width = 100
     Height = 20
@@ -426,7 +426,7 @@ object Form1: TForm1
   end
   object ball: TImage
     Left = 245
-    Top = 245
+    Top = 285
     Width = 32
     Height = 32
     AutoSize = True
@@ -535,9 +535,10 @@ object Form1: TForm1
   object currentPoint: TLabel
     Left = 80
     Top = 88
-    Width = 393
+    Width = 377
     Height = 33
     Alignment = taCenter
+    AutoSize = False
     Caption = 'Punkt dla gracza czerwonego!'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -553,6 +554,7 @@ object Form1: TForm1
     Width = 97
     Height = 33
     Alignment = taCenter
+    AutoSize = False
     Caption = '0:0'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -563,11 +565,12 @@ object Form1: TForm1
     Visible = False
   end
   object currentHits: TLabel
-    Left = 160
+    Left = 152
     Top = 200
     Width = 225
     Height = 33
     Alignment = taCenter
+    AutoSize = False
     Caption = 'liczba odbi'#263': X'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -592,6 +595,7 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
     Visible = False
+    OnClick = nextRoundClick
   end
   object newGame: TButton
     Left = 168
@@ -608,6 +612,7 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 1
     Visible = False
+    OnClick = newGameClick
   end
   object timerBall: TTimer
     Interval = 20
@@ -620,21 +625,20 @@ object Form1: TForm1
     Interval = 20
     OnTimer = timerBlueLeftTimer
     Left = 72
-    Top = 512
+    Top = 568
   end
   object timerBlueRight: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerBlueRightTimer
     Left = 464
-    Top = 512
+    Top = 560
   end
   object timerRedLeft: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerRedLeftTimer
-    Left = 64
-    Top = 24
+    Left = 200
   end
   object timerRedRight: TTimer
     Enabled = False
