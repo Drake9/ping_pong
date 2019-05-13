@@ -8,10 +8,11 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
-int ballSpeedX = -7,    ballSpeedY = -7;
-int palletSpeed = 14;
+int ballSpeedX = -5,    ballSpeedY = -5;
+int palletSpeed = 15;
 int hits = 0;
 int pointsBlue = 0,     pointsRed = 0;
+bool startingProgram = true;
 
 void viewPointScored(){
         Form1->currentHits->Caption = "liczba odbiæ: " + IntToStr(hits);
@@ -27,18 +28,32 @@ void viewPointScored(){
         Form1->nextRound->Enabled = true;
         Form1->newGame->Enabled = true;
 }
+
+void resumeGame(){
+        Form1->currentPoint->Visible = false;
+        Form1->currentHits->Visible = false;
+        Form1->score->Visible = false;
+        Form1->nextRound->Visible = false;
+        Form1->newGame->Visible = false;
+
+        Form1->nextRound->Enabled = false;
+        Form1->newGame->Enabled = false;
+
+        hits = 0;
+        Form1->ball->Left = 245;
+        Form1->ball->Top = 293;
+        Form1->palletBlue->Left = 215;
+        Form1->palletRed->Left = 215;
+        Sleep(1000);
+        Form1->timerBall->Enabled = true;
+}
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
-        AnsiString welcome = "Witamy w grze PingPong! ";
-	AnsiString blue = "Niebieski gracz steruje praw¹ i lew¹ strza³k¹. ";
-	AnsiString red = "Czerwony gracz steruje klawiszami A i D. ";
-	AnsiString hit = "Prêdkoœæ pi³ki zale¿y od przytrzymania klawisza w momencie uderzenia. ";
-        AnsiString haveFun = "Mi³ej zabawy!";
-
-	ShowMessage(welcome + sLineBreak + sLineBreak + blue + sLineBreak + red + sLineBreak
-                        + hit + sLineBreak + sLineBreak + haveFun);
+	Application->MessageBox("Witamy w grze PingPong! \n \nNiebieski gracz steruje praw¹ i lew¹ strza³k¹.\nCzerwony gracz steruje klawiszami A i D \nPrêdkoœæ pi³ki zale¿y od przytrzymania klawisza w momencie uderzenia. \n\nMi³ej zabawy!", "PingPong", MB_OK);
+        Show();
+        Application->BringToFront();
 }
 //---------------------------------------------------------------------------
 
@@ -63,11 +78,11 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
                 hits++;
 
                 if(timerBlueLeft->Enabled == true)
-                        ballSpeedX -= palletSpeed/2;
+                        ballSpeedX -= palletSpeed/3;
                 else if(timerBlueRight->Enabled == true)
-                        ballSpeedX += palletSpeed/2;
+                        ballSpeedX += palletSpeed/3;
                 else
-                        ballSpeedY -= palletSpeed/2;
+                        ballSpeedY -= palletSpeed/3;
         }
 
         if(ball->Left + ball->Width/2 >= palletRed->Left
@@ -78,21 +93,23 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
                 hits++;
 
                 if(timerRedLeft->Enabled == true)
-                        ballSpeedX -= palletSpeed/2;
+                        ballSpeedX -= palletSpeed/3;
                 else if(timerRedRight->Enabled == true)
-                        ballSpeedX += palletSpeed/2;
+                        ballSpeedX += palletSpeed/3;
                 else
-                        ballSpeedY += palletSpeed/2;
+                        ballSpeedY += palletSpeed/3;
         }
 
         //          POINT
-        if(ball->Top <= palletRed->Top){
+        if(ball->Top <= palletRed->Top - 5){
                currentPoint->Caption  = "Punkt dla gracza niebieskiego!";
+               currentPoint->Color = clBlue;
                pointsBlue++;
                viewPointScored();
         }
-        if(ball->Top + ball->Height >= palletBlue->Top + palletBlue->Height){
+        if(ball->Top + ball->Height >= palletBlue->Top + palletBlue->Height + 5){
                currentPoint->Caption  = "Punkt dla gracza czerwonego!";
+               currentPoint->Color = clRed;
                pointsRed++;
                viewPointScored();
         }
@@ -162,55 +179,32 @@ void __fastcall TForm1::timerRedRightTimer(TObject *Sender)
 
 void __fastcall TForm1::nextRoundClick(TObject *Sender)
 {
-        Form1->currentPoint->Visible = false;
-        Form1->currentHits->Visible = false;
-        Form1->score->Visible = false;
-        Form1->nextRound->Visible = false;
-        Form1->newGame->Visible = false;
-
-        Form1->nextRound->Enabled = false;
-        Form1->newGame->Enabled = false;
-
-        hits = 0;
-        Form1->ball->Left = 245;
-        Form1->ball->Top = 285;
-        ballSpeedX = -7;
+        ballSpeedX = -5;
         if(ballSpeedY < 0 )
-                ballSpeedY = -7;
+                ballSpeedY = -5;
         else
-                ballSpeedY = 7;
-        Form1->palletBlue->Left = 222;
-        Form1->palletRed->Left = 222;
-        Sleep(1000);
-        Form1->timerBall->Enabled = true;
+                ballSpeedY = 5;
+
+        resumeGame();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::newGameClick(TObject *Sender)
 {
-        Form1->currentPoint->Visible = false;
-        Form1->currentHits->Visible = false;
-        Form1->score->Visible = false;
-        Form1->nextRound->Visible = false;
-        Form1->newGame->Visible = false;
+        if(startingProgram){
+            startingProgram = false;
+            resumeGame();
+        }
+        else if(Application->MessageBox("Czy na pewno chcesz zacz¹æ od nowa?", "Nowa gra", MB_YESNO) == IDYES){
 
-        Form1->nextRound->Enabled = false;
-        Form1->newGame->Enabled = false;
+                pointsBlue = 0;
+                pointsRed = 0;
 
-        hits = 0;
-        ballSpeedX = -7;
-        ballSpeedY = -7;
-        pointsBlue = 0;
-        pointsRed = 0;
-        
-        Form1->ball->Left = 245;
-        Form1->ball->Top = 285;
-        ballSpeedX = -7;
-        ballSpeedY = -7;
-        Form1->palletBlue->Left = 222;
-        Form1->palletRed->Left = 222;
-        Sleep(1000);
-        Form1->timerBall->Enabled = true;
+                ballSpeedX = -5;
+                ballSpeedY = -5;
+
+                resumeGame();
+        }
 }
 //---------------------------------------------------------------------------
 
