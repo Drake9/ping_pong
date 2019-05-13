@@ -1,10 +1,11 @@
 object Form1: TForm1
   Left = 453
-  Top = 126
-  AutoScroll = False
-  Caption = 'Ping Pong'
-  ClientHeight = 631
-  ClientWidth = 542
+  Top = 122
+  BorderStyle = bsDialog
+  BorderWidth = 5
+  Caption = 'PingPong'
+  ClientHeight = 651
+  ClientWidth = 524
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -14,6 +15,9 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  ShowHint = False
+  Visible = True
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -21,14 +25,14 @@ object Form1: TForm1
   object background: TShape
     Left = 0
     Top = 0
-    Width = 542
-    Height = 631
+    Width = 524
+    Height = 651
     Align = alClient
     Brush.Color = clGrayText
   end
   object palletBlue: TImage
-    Left = 222
-    Top = 576
+    Left = 214
+    Top = 600
     Width = 100
     Height = 20
     AutoSize = True
@@ -226,7 +230,7 @@ object Form1: TForm1
     Transparent = True
   end
   object palletRed: TImage
-    Left = 223
+    Left = 215
     Top = 30
     Width = 100
     Height = 20
@@ -426,7 +430,7 @@ object Form1: TForm1
   end
   object ball: TImage
     Left = 245
-    Top = 285
+    Top = 293
     Width = 32
     Height = 32
     AutoSize = True
@@ -533,9 +537,9 @@ object Form1: TForm1
     Transparent = True
   end
   object currentPoint: TLabel
-    Left = 80
+    Left = 64
     Top = 88
-    Width = 377
+    Width = 401
     Height = 33
     Alignment = taCenter
     AutoSize = False
@@ -565,9 +569,9 @@ object Form1: TForm1
     Visible = False
   end
   object currentHits: TLabel
-    Left = 152
+    Left = 144
     Top = 200
-    Width = 225
+    Width = 249
     Height = 33
     Alignment = taCenter
     AutoSize = False
@@ -581,10 +585,11 @@ object Form1: TForm1
     Visible = False
   end
   object nextRound: TButton
-    Left = 168
-    Top = 352
-    Width = 217
+    Left = 144
+    Top = 400
+    Width = 249
     Height = 33
+    Cursor = crHandPoint
     Caption = 'Nast'#281'pna runda'
     Enabled = False
     Font.Charset = EASTEUROPE_CHARSET
@@ -598,12 +603,12 @@ object Form1: TForm1
     OnClick = nextRoundClick
   end
   object newGame: TButton
-    Left = 168
-    Top = 440
-    Width = 217
+    Left = 144
+    Top = 472
+    Width = 249
     Height = 33
+    Cursor = crHandPoint
     Caption = 'Nowa gra'
-    Enabled = False
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
     Font.Height = -27
@@ -611,10 +616,10 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    Visible = False
     OnClick = newGameClick
   end
   object timerBall: TTimer
+    Enabled = False
     Interval = 20
     OnTimer = timerBallTimer
     Left = 216
@@ -624,27 +629,28 @@ object Form1: TForm1
     Enabled = False
     Interval = 20
     OnTimer = timerBlueLeftTimer
-    Left = 72
-    Top = 568
+    Left = 64
+    Top = 600
   end
   object timerBlueRight: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerBlueRightTimer
     Left = 464
-    Top = 560
+    Top = 600
   end
   object timerRedLeft: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerRedLeftTimer
-    Left = 200
+    Left = 48
+    Top = 16
   end
   object timerRedRight: TTimer
     Enabled = False
     Interval = 20
     OnTimer = timerRedRightTimer
     Left = 464
-    Top = 24
+    Top = 16
   end
 end
