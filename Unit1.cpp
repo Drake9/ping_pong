@@ -2,7 +2,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
-
+#include "mmsystem.h"
 #include "Unit1.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -27,9 +27,11 @@ void viewPointScored(){
 
         Form1->nextRound->Enabled = true;
         Form1->newGame->Enabled = true;
+        sndPlaySound("snd/point.wav", SND_ASYNC);
 }
 
 void resumeGame(){
+        sndPlaySound("snd/button.wav", SND_ASYNC);
         Form1->currentPoint->Visible = false;
         Form1->currentHits->Visible = false;
         Form1->score->Visible = false;
@@ -74,6 +76,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
            && ball->Left + ball->Width/2 <= palletBlue->Left + palletBlue->Width
            && ball->Top + ball->Height >= palletBlue->Top
            && ballSpeedY > 0){
+                sndPlaySound("snd/bounce.wav", SND_ASYNC);
                 ballSpeedY = -ballSpeedY;
                 hits++;
 
@@ -89,6 +92,7 @@ void __fastcall TForm1::timerBallTimer(TObject *Sender)
            && ball->Left + ball->Width/2 <= palletRed->Left + palletRed->Width
            && ball->Top <= palletRed->Top +palletRed->Height
            && ballSpeedY < 0){
+                sndPlaySound("snd/bounce.wav", SND_ASYNC);
                 ballSpeedY = -ballSpeedY;
                 hits++;
 
